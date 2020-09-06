@@ -1,0 +1,41 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gcp-api
+  namespace: '549760520743'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/549760520743/services/gcp-api
+  uid: 6730b12d-e164-4340-8d5c-1ae783177f9f
+  resourceVersion: AAWubvywYcE
+  generation: 1
+  creationTimestamp: '2020-09-03T20:55:59.519809Z'
+  labels:
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    serving.knative.dev/creator: madualuga@gmail.com
+    serving.knative.dev/lastModifier: madualuga@gmail.com
+    client.knative.dev/user-image: >-
+      gcr.io/jarvis-184904/gcp-api@sha256:2b4537d5902076a7602639f392eb8db00378422f947a122acc5d6645ab97b8fe
+spec:
+  template:
+    metadata:
+      name: gcp-api-00001-hoj
+      annotations:
+        run.googleapis.com/client-name: cloud-console
+        autoscaling.knative.dev/maxScale: '1000'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      containers:
+      - image: >-
+          gcr.io/jarvis-184904/gcp-api@sha256:2b4537d5902076a7602639f392eb8db00378422f947a122acc5d6645ab97b8fe
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 256Mi
+  traffic:
+  - percent: 100
+    latestRevision: true
+
